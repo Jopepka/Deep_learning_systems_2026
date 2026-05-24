@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  llm-service:
+    image: pytorch/pytorch:2.11.0-cuda12.8-cudnn9-devel
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    environment:
+      - HUGGING_FACE_TOKEN="Токен hugging-face" 
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    command: >
+      bash -c "
+        pip install --break-system-packages -r /app/requirements.txt &&
+        python /app/main.py
+      "
