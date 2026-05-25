@@ -7,7 +7,7 @@ services:
       - ./app:/app
     working_dir: /app
     environment:
-      - HUGGING_FACE_TOKEN="Токен hugging-face" 
+      - HUGGING_FACE_TOKEN=Токен_hugging_face
     deploy:
       resources:
         reservations:
